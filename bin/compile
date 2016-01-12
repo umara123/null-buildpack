@@ -2,6 +2,14 @@
 # bin/compile <build-dir> <cache-dir>
 
 BUILD_DIR=$1
+echo Build Dir is + $BUILD_DIR
+
+JVM_COMMON_BUILDPACK=${JVM_COMMON_BUILDPACK:-https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/jvm-common.tgz}
+mkdir -p /tmp/jvm-common
+curl --retry 3 --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-common --strip-components=1
+. /tmp/jvm-common/bin/util
+. /tmp/jvm-common/bin/java
+. /tmp/jvm-common/opt/jdbc.sh
 
 # install JDK
 javaVersion=1.8
