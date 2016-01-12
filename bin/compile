@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-echo "-----> Nothing to do."
+BUILD_DIR=$1
+
+# install JDK
+javaVersion=1.8
+status_pending "Installing OpenJDK ${javaVersion}"
+install_java ${BUILD_DIR} ${javaVersion}
+jdk_overlay ${BUILD_DIR}
+status_done
