@@ -12,7 +12,7 @@ curl --retry 3 --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-c
 . /tmp/jvm-common/opt/jdbc.sh
 
 # install JDK
-javaVersion=1.8
+javaVersion=$(detect_java_version ${BUILD_DIR})
 status_pending "Installing OpenJDK ${javaVersion}"
 install_java ${BUILD_DIR} ${javaVersion}
 jdk_overlay ${BUILD_DIR}
